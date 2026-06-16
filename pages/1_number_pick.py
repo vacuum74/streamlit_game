@@ -10,8 +10,15 @@ if "secret" not in st.session_state:
     st.session_state.done = False
 
 if not st.session_state.done:
-    guess = st.number_input("1~100 사이 숫자를 입력하세요", min_value=1, max_value=100, step=1)
-    if st.button("추측하기"):
+    # form으로 묶으면 입력 후 Enter로 제출(추측하기)이 작동함
+    with st.form("guess_form"):
+        guess = st.number_input(
+            "1~100 사이 숫자를 입력하세요",
+            min_value=1, max_value=100, step=1
+        )
+        submitted = st.form_submit_button("추측하기")
+
+    if submitted:
         st.session_state.tries += 1
         if guess < st.session_state.secret:
             st.info("📈 더 높아요!")
@@ -20,6 +27,7 @@ if not st.session_state.done:
         else:
             st.success(f"🎉 정답! {st.session_state.tries}번 만에 맞혔어요!")
             st.session_state.done = True
+            st.rerun()  # 정답 시 즉시 화면 갱신 → '다시 하기' 버튼 표시
 
 if st.session_state.done:
     if st.button("다시 하기"):
