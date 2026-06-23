@@ -5,7 +5,7 @@ MAX_TRIES = 10
 
 st.title("🎯 숫자 맞추기 게임")
 st.write(st.session_state.secret)
-
+st.write(st.session_state.guess)
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(1, 100)
 if "left" not in st.session_state:
