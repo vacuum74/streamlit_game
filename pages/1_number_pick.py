@@ -17,7 +17,7 @@ if "msg" not in st.session_state:
     st.session_state.msg = None
 
 st.write(st.session_state.secret)
-if "guss" in st.session_state:
+if "guess" in st.session_state:
     st.write(st.session_state.guess)
 
 
